@@ -1,0 +1,108 @@
+﻿@model IEnumerable<GuiaApp.Model.Local>
+
+@{
+    ViewBag.Title = "Local";
+}
+
+<ol class="breadcrumb breadcrumb-border">
+    <li>@Html.ActionLink("Home", "Index")</li>
+    <li class="active">Local</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtrar locais</div>
+    <div class="panel-body">
+
+        <form class="form-horizontal" role="form" method="post">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Descrição</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="descricao" name="descricao" value="@ViewBag.Descricao">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Status</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="status" name="status" value="@ViewBag.Status">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel-footer">
+        <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-search"></span> Consultar</button>
+        <a href="@Url.Action("Create")" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Criar local</a>
+    </div>
+</div>
+
+<div class="panel panel-default space">
+    <div class="panel-heading">Locais</div>
+
+    <div class="panel-padding ">
+        <table class="display" id="grid">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Menu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Menu.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td class="grid-option">
+                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td class="grid-option">
+                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        var oTable = $('#grid').dataTable({
+            "bJQueryUI": true,
+            "sPaginationType": "full_numbers",
+            "aoColumns": [null, null, null, null, null, { "bSortable": false }, { "bSortable": false }]
+        });
+
+
+    </script>
+}

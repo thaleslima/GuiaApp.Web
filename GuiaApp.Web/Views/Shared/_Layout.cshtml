@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Guia APP</title>
+    @Styles.Render("~/Content/css")
+
+    <link href="http://getbootstrap.com/examples/offcanvas/offcanvas.css" rel="stylesheet"/>
+  
+</head>
+<body class="background">
+  
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">Guia App</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="menu1"><a href="#about">Sobre</a></li>
+                    <li id="menu2"><a href="#contact">Contato</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <aside class="list-group">
+                    <a href="@Url.Action("Index", "User")" class="list-group-item" id="item1">Usuário</a>
+                    <a href="@Url.Action("Index", "City")" class="list-group-item" id="item2">Cidade</a>
+                    <a href="@Url.Action("Index", "Menu")" class="list-group-item" id="item3">Menu</a>
+                    <a href="@Url.Action("Index", "Local")" class="list-group-item" id="item4">Local</a>
+                </aside>
+            </div><!--/span-->
+
+            <section class="col-xs-12 col-sm-9">
+                <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Exibir menu</button>
+                </p>
+
+
+                @if (TempData["messageSuccess"] != null && !string.IsNullOrEmpty(TempData["messageSuccess"].ToString()))
+                {
+                    <div class="alert alert-dismissible alert-success alert-message">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        @TempData["messageSuccess"]
+                    </div>
+                }
+
+                @RenderBody()
+            </section><!--/span-->
+        </div><!--/row-->
+    </div><!--/.container-->
+
+    <hr>
+
+    <footer>
+        <p class="text-muted">@DateTime.Now.Year - Guia App</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+    <script src="http://getbootstrap.com/examples/offcanvas/offcanvas.js"></script>
+</body>
+</html>

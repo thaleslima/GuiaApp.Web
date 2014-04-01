@@ -1,0 +1,59 @@
+﻿@model GuiaApp.Model.User
+
+@{
+    ViewBag.Title = "Deletar usuário";
+}
+
+<ol class="breadcrumb breadcrumb-border">
+    <li>@Html.ActionLink("Usuário", "Index")</li>
+    <li class="active">Deletar usuário</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Dados</div>
+
+    <div class=" panel-padding2">
+        <div class="alert alert-warning">
+            Tem certeza de que deseja excluir este registro?
+        </div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+        </dl>
+    </div>
+    <div class="panel-footer">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+                <a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-ok"></span> Deletar
+                </button>
+        }
+    </div>
+</div>

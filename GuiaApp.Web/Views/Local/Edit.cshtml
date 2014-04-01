@@ -1,0 +1,179 @@
+﻿@model GuiaApp.Model.Local
+
+@{
+    ViewBag.Title = "Editar local";
+}
+
+<ol class="breadcrumb breadcrumb-border">
+    <li>@Html.ActionLink("Local", "Index")</li>
+    <li class="active">Editar local</li>
+</ol>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Dados</div>
+
+        <div class="form-horizontal panel-padding2">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdMenu, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("IdMenu", null, String.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdMenu)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdCity, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("IdCity", null, String.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdCity)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Telephone, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Telephone)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Site, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Site, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Site)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Active, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Active)
+                    @Html.ValidationMessageFor(model => model.Active)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PathImage, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input name="file" type="file" id="file" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    @if (string.IsNullOrEmpty(Model.PathImage))
+                    {
+                        <div class="image empty">
+                            <span class="text-upload-file">Resolução: 1024 (largura) x 500 (altura)</span>
+                            <span class="glyphicon glyphicon-picture"></span>
+
+                            <img id="image-local" src="" alt="Imagem local " class="hide" width="275" />
+                            <input type="hidden" name="PathImage" id="PathImage" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="image">
+                            <span class="text-upload-file hide">Resolução: 1024 (largura) x 500 (altura)</span>
+                            <span class="glyphicon glyphicon-picture hide"></span>
+
+                            <img id="image-local" src="~/Imagens/@Model.PathImage" alt="Imagem local " width="275" />
+                            <input type="hidden" name="PathImage" value="@Model.PathImage" id="PathImage" />
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "12" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address)
+
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn" onclick="ValidaBuscaEndereco()"><i class="icon-map-marker"></i> Localizar</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Latitude)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Longitude)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    <div class="form-inline mapa-adm" id="map_canvas" style="width:500px;height:380px;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-footer">
+            <a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok"></span> Atualizar
+            </button>
+
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDqDF9moHDZE1-r4okO_Ha2GhrKNfu5ZBY&sensor=false"></script>
+    <script src="~/Scripts/map.js"></script>
+}

@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <title>Guia App</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body class="background">
+    <div class="login">
+        <form id="form1" method="post">
+            @Html.ValidationSummary(true)
+            <div class="input">
+                <fieldset>
+                    <h3>Login</h3>
+                    <hr />
+                    <div id="divGrupoUsuario" class="control-group">
+                        <h5>E-mail:</h5>
+                        <div id="divControlUsuario" class="controls">
+                            <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Digite o e-mail">
+                        </div>
+                    </div>
+                    
+                    <div id="divGrupoSenha" class="control-group">
+                        <h5 class="control-label">Senha:</h5>
+                        <div id="divControlSenha" class="controls">
+                            <input type="password" name="senha" class="form-control" id="inputPassword3" placeholder="Digite a senha">
+                        </div>
+                    </div>
+                    <div class="login-submit" style="float:left">
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </div>
+
+                    <div class="login-submit" style="float:right">
+                        <a href="@Url.Action("Demo")" class="btn btn-warning">Demo</a>
+                    </div>
+               
+                </fieldset>
+            </div>
+        </form>
+    </div>
+
+    <div id="divAlerta" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-header-text"></h3>
+        </div>
+        <div class="modal-body">
+            <p class="modal-body-text"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

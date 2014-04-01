@@ -1,0 +1,51 @@
+﻿@model GuiaApp.Model.City
+
+@{
+    ViewBag.Title = "Editar cidade";
+}
+
+<ol class="breadcrumb breadcrumb-border">
+    <li>@Html.ActionLink("Editar", "Index")</li>
+    <li class="active">Editar usuário</li>
+</ol>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Dados</div>
+
+        <div class="form-horizontal panel-padding2">
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Uf, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Uf, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Uf)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-footer">
+            <a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok"></span> Atualizar
+            </button>
+
+        </div>
+    </div>
+}
